@@ -1,6 +1,6 @@
 **Creative Coding I: Design & Communication**
 
-Prof. Dr. Lena Gieseke | l.gieseke@filmuniversitaet.de | Film University Babelsberg _KONRAD WOLF_
+Anna Eschenbacher | anna.eschenbacher@filmuniversitaet.de | Film University Babelsberg _KONRAD WOLF_
 
 ---
 
@@ -332,7 +332,7 @@ let material_2 = new THREE.MeshPhongMaterial({ color: 0x2d2d2d, wireframe: true 
 let icosa_2 = new THREE.Mesh(icosaGeometry_2, material_2);
 scene.add(icosa_2);
 ```
-and animate it in the animte loop"
+and animate it in the animte loop:
 ```js
 icosa_2.rotation.x += 0.008;
 icosa_2.rotation.z += 0.005;
