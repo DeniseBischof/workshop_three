@@ -13,8 +13,6 @@ Anna Eschenbacher | anna.eschenbacher@filmuniversitaet.de | Film University Babe
         -   [Alternatives](#Alternatives)
     -   [Example projects](#Example-projects)
     -   [Building your first scene](#Building-your-first-scene)
-        -   [HTML](#html)
-            -   [HTML5](#html5)
     -   [Summary](#summary)
     -   [References](#references)
 
