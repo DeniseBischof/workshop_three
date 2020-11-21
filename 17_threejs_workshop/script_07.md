@@ -360,10 +360,7 @@ icosa_2.rotation.z += 0.005;
 
 ## References
 
-[[1] Github Three.js](https://github.com/mrdoob/three.js/)  
-[[2] Eloquent Javascript](https://eloquentjavascript.net)  
-[[3] Team Tree House](https://blog.teamtreehouse.com/i-dont-speak-your-language-frontend-vs-backend)  
-[[4] Course Report](https://www.coursereport.com/blog/front-end-development-vs-back-end-development-where-to-start)
+[[1] Github Three.js](https://github.com/mrdoob/three.js/) 
 
 ---
 
