@@ -176,7 +176,7 @@ As a last step, we add an EventListener for the browser window size. This ensure
 Now we have a scene, a camera, and renderer. Let's put something into our scene.
 
 Often times the first object is a cube, but let's go with an icosahedron, which is a much fancier shape.
-If you prefer a cube you can exchange the let ```geometry = ..``` line with ```let geometry = new THREE.BoxGeometry();``` instead.
+If you prefer a cube you can exchange the first line with ```let geometry = new THREE.BoxGeometry();``` instead.
 
 ```js
 // GEOMETRY
