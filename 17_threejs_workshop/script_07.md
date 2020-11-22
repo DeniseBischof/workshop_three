@@ -287,7 +287,7 @@ There are a few different cameras in Three.js. We will use a PerspectiveCamera s
 The first attribute is the **field of view**. FOV is the extent of the scene that is seen on the display at any given moment. The value is in degrees. 
 
 <img src="./img/FOV.jpg" width="500px">
-[[4] FOV Image](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
+[4](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
 
 The second one is the **aspect ratio**. You almost always want to use the width of the element divided by the height, otherwise you'll get a distorted image. The next two attributes are the **near and far clipping plane**. What that means, is that objects further away from the camera than the value of **far** won't be rendered. Same applies to objects closer than the **near** value. This is mainly used for better perfomance. By defining these attributes, we constrain the rendered area to space inside of the purple box in this image:
 
