@@ -304,6 +304,7 @@ Often times the first object is a cube, but let's go with an [icosahedron](https
 
 ```js
 // GEOMETRY
+// ICOSAHEDRON
 let icosaGeometry = new THREE.IcosahedronGeometry(1.5, 0); 
 let icosaMaterial = new THREE.MeshPhongMaterial({ color: 0xaa5e82, roughness: 0.2 });
 let mesh = new THREE.Mesh( icosaGeometry, icosaMaterial );
@@ -329,6 +330,7 @@ To be able to see anything we still need some light. There are a few different [
 
 ```js
 // LIGHTING
+// AMBIENT
 let ambientLight = new THREE.AmbientLight(0xffffff, 0.8); // (color, intensity)
 // add the ambient light to the scene
 scene.add(ambientLight);
@@ -367,15 +369,12 @@ function animate() {
     controls.update();
     renderer.render(scene, camera);
 }
+animate();
 ```
 Now try dragging the mouse across your scene and zooming in and out by scrolling. We still can't really make out the edges of the cube. Let's add another light below the ambient light.
 
 ```js
-// LIGHTING
-let ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-// add the ambient light to the scene
-scene.add(ambientLight);
-
+// POINTLIGHT
 let pointLight = new THREE.PointLight(0xc9efff, 0.8);
 pointLight.position.set(0, 4, 2);
 // shadow settings
@@ -400,8 +399,16 @@ To make our scene a bit more exciting, we will add some animation. One easy way 
 
 Add the following right below the requestAnimationFrame(animate) function:
 ```js
-mesh.rotation.x += 0.004;
-mesh.rotation.y += 0.007;
+function animate() {
+    requestAnimationFrame(animate);
+
+    mesh.rotation.x += 0.004;
+    mesh.rotation.y += 0.007;
+
+    controls.update();
+    renderer.render(scene, camera);
+}
+animate();
 ```
 
 Congratulations :) You just created your first Three.js application!
@@ -451,6 +458,7 @@ gui.addColor(parameters, 'material').onChange(function (val) {
 We can also add a second mesh. This time the material is set to wireframe, so we will only see the connected edges.
 
 ```js
+//ICOSAHEDRON 2
 let icosaGeometry_2 = new THREE.IcosahedronGeometry(2.0, 0); //radius, detail
 let material_2 = new THREE.MeshPhongMaterial({ color: 0x2d2d2d, wireframe: true });
 let icosa_2 = new THREE.Mesh(icosaGeometry_2, material_2);
@@ -458,11 +466,23 @@ scene.add(icosa_2);
 ```
 and animate it in the animte loop:
 ```js
-icosa_2.rotation.x += 0.008;
-icosa_2.rotation.z += 0.005;
+function animate() {
+    requestAnimationFrame(animate);
+
+    mesh.rotation.x += 0.004;
+    mesh.rotation.y += 0.007;
+
+    icosa_2.rotation.x += 0.008;
+    icosa_2.rotation.z += 0.005;
+
+    controls.update();
+    renderer.render(scene, camera);
+}
+animate();
 ```
 
 That's it for now! I added a few more features to the gui in this [file](). Now it's your turn to expand this scene :)🥳✨💥 
+
 It's always a good starting point to go through the [documentation](https://threejs.org/docs/index.html#api/en/geometries/ConeBufferGeometry) of Three.js to find some parameters you can change and add.
 
 Feel free to contact me if you have any questions: anna.eschenbacher@filmuniversitaet.de
