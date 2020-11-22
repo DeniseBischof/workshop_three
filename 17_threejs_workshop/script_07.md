@@ -145,6 +145,10 @@ As you can see it it's quite **a lot** to write for a red triangle. That is wher
 ### Three.js
 Three.js is an **open-source library** and **API** using WebGL. It is used to create and display animated 3D graphics in a web browser. It simplifies the creation of WebGL tools and environments. [[2]](https://github.com/mrdoob/three.js/) This means, there is a whole library of simplified functions for geometries, materials, lighting, audio, etc.
 
+A basic Three.js project consits of these elements:
+<br><img src="./img/scene_graph.png" width="600">
+[[3]](https://miro.medium.com/max/701/1*Bkk14XZa94WTue7F7DrhCA.png)
+
 ### Alternatives
 There are a few alternatives to Three.js. The most popular one for 3D content might be [babel.js](https://babeljs.io).
 Of course [p5.js](https://p5js.org/) is also an alternative, but mostly used for 2D graphics. Aside from that, you can find more alternatives [here](https://alternativeto.net/software/three-js/).
@@ -272,55 +276,54 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
 });
 ```
-There are a few different cameras in Three.js. We will use a PerspectiveCamera since its projection mode is designed to mimic the way the human eye sees.
+#### Scene
+Three.js uses the concept of a scene to define an area where you can place things like geometry, lights, cameras, and so on. Later on, we will add objects into our scene, so they are visible to the camera and renderer.
 
+#### Camera
+There are a few different cameras in Three.js. We will use a PerspectiveCamera since its projection mode is designed to mimic the way the human eye sees.
 **PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )**
 
 The first attribute is the **field of view**. FOV is the extent of the scene that is seen on the display at any given moment. The value is in degrees. 
 
 <img src="./img/FOV.jpg" width="500px">
-[[3] FOV Image](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
+[[4] FOV Image](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
 
-The second one is the **aspect ratio**. You almost always want to use the width of the element divided by the height, otherwise you'll get a distorted image.
-
-The next two attributes are the **near and far clipping plane**. What that means, is that objects further away from the camera than the value of **far** won't be rendered. Same applies to objects closer than the **near** value. This is mainly used for better perfomance.
+The second one is the **aspect ratio**. You almost always want to use the width of the element divided by the height, otherwise you'll get a distorted image. The next two attributes are the **near and far clipping plane**. What that means, is that objects further away from the camera than the value of **far** won't be rendered. Same applies to objects closer than the **near** value. This is mainly used for better perfomance. By defining these attributes, we constrain the rendered area to space inside of the purple box in this image:
 
 <img src="./img/camera.png" width="500px">
 
-Next up is the **renderer**. We will use the WebGLRenderer. Three.js comes with a few others, often used as fallbacks for users with older browsers or for those who don't have WebGL support for some reason.
+#### Renderer
+Next up is the **renderer**. We will use the WebGLRenderer. Three.js comes with a few others, often used as fallbacks for users with older browsers or for those who don't have WebGL support for some reason. We also need to **set the size** at which we want it to render our app. It is best to use the width and height of the area we want to fill with our app - in this case, the width and height of the browser window. We already added some details about shadows here. That is not relevant at the moment, but we will get back to this later.
 
-We also need to **set the size** at which we want it to render our app. It is best to use the width and height of the area we want to fill with our app - in this case, the width and height of the browser window.
+We need to add the renderer element to our HTML document with ```document.body.appendChild(renderer.domElement);```. As a last step, we add an EventListener for the browser window size. This ensures a responsive Three.js scene, when the size changes.
 
-We already added some details about shadows here. We will get back to this later.
+Now we have a **scene**, a **camera**, and **renderer**. Let's put something into our scene.
 
-We need to add the renderer element to our HTML document with ```document.body.appendChild(renderer.domElement);```
-
-As a last step, we add an EventListener for the browser window size. This ensures a responsive Three.js scene, when the size changes.
-
-Now we have a scene, a camera, and renderer. Let's put something into our scene.
-
-Often times the first object is a cube, but let's go with an icosahedron, which is a much fancier shape.
-If you prefer a cube you can exchange the first line with ```let geometry = new THREE.BoxGeometry();``` instead.
+Often times the first object is a cube, but let's go with an [icosahedron](https://threejs.org/docs/#api/en/geometries/IcosahedronGeometry), which is a much fancier shape. If you prefer a cube you can exchange the first line with ```let geometry = new THREE.BoxGeometry();``` instead.
 
 ```js
 // GEOMETRY
 let icosaGeometry = new THREE.IcosahedronGeometry(1.5, 0); 
-let icosaMaterial = new THREE.MeshStandardMaterial({ color: 0xaa5e82, roughness: 0.2 });
+let icosaMaterial = new THREE.MeshPhongMaterial({ color: 0xaa5e82, roughness: 0.2 });
 let mesh = new THREE.Mesh( icosaGeometry, icosaMaterial );
 mesh.castShadow = true;
 // add the mesh to the scene
 scene.add(mesh);
 ```
+#### Geometry
 To create a icosahedron, we need a **THREE.IcosahedronGeometry(radius, detail)**. This is an object that contains all the points (vertices) and fill (faces) of the icosahedron. Three.js offers a few basic and some more complex geometric shapes.
 
-We will also need a **material** to color it. Three.js comes with several materials, but we'll use the MeshStandardMaterial for now. All materials can be filled with certain attributes to change the look. This can be color, roughness, as well as a texture.
+#### Material
+We will also need a **material** to color it. Three.js comes with several materials, but we'll use the MeshPhongMaterial for now. All materials can be filled with certain attributes to change the look. This can be color, roughness, as well as a texture. Here are all attributes listed for a [MeshPhongMaterial](https://threejs.org/docs/#api/en/materials/MeshPhongMaterial).
 
-The third thing we need is a **Mesh**. A mesh is an object that takes a **geometry**, and applies a **material** to it, which we then can insert to our **scene**, and move freely around.
+#### Mesh
+The third thing we need is a [**mesh**](https://threejs.org/docs/#api/en/objects/Mesh). A mesh is an object that takes a **geometry**, and applies a **material** to it, which we then can insert to our **scene**, and move freely around.
 
 <img src="./img/meshgeomat.png" width="500px">
 
-By default, when we call scene.add(), the thing we add will be added to the coordinates (0,0,0). This is why we moved the camera back a bit earlier.
+By default, when we call scene.add(), the object we add will be added to the coordinates (0,0,0). This is why we moved the camera back a bit earlier.
 
+#### Lighting
 To be able to see anything we still need some light. There are a few different [lights](https://threejs.org/examples/?q=light#webgl_lights_hemisphere) like ambient light, directional light, point light, spot light. First, will use an ambient light to illuminate the whole scene.
 
 ```js
@@ -330,6 +333,7 @@ let ambientLight = new THREE.AmbientLight(0xffffff, 0.8); // (color, intensity)
 scene.add(ambientLight);
 ```
 
+#### Render/Animate loop
 Now we will add an animate or render loop similar to the draw() loop in p5.js. This will create a loop that causes the renderer to draw the scene every time the screen is refreshed (typically around 60 times per second). 
 
 ```js
@@ -486,7 +490,8 @@ icosa_2.rotation.z += 0.005;
 
 [[1] WebGL definition](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
 [[2] Github Three.js](https://github.com/mrdoob/three.js/)
-[[3] FOV Image](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
+[[3] Scene Graph](https://miro.medium.com/max/701/1*Bkk14XZa94WTue7F7DrhCA.png)
+[[4] FOV Image](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
 
 
 ---
