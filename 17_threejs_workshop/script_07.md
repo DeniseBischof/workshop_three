@@ -455,6 +455,26 @@ gui.addColor(parameters, 'material').onChange(function (val) {
 });
 ```
 
+Try changing the color of the mesh with the GUI in the upper right corner. You could do the same thing with our point light by adding another gui parameter:
+```js
+// GUI
+let gui = new dat.GUI({ width: 300 });
+gui.open();
+
+// get the default value 
+let parameters = {
+    material: icosaMaterial.color.getHex(),
+	light_color: pointLight.color.getHex()
+    };
+
+gui.addColor(parameters, 'material').onChange(function (val) {
+        icosaMaterial.color.setHex(val);
+});
+gui.addColor(parameters, 'light_color').onChange(function (val) {
+        pointLight.color.setHex(val);
+});
+```
+
 We can also add a second mesh. This time the material is set to wireframe, so we will only see the connected edges.
 
 ```js
