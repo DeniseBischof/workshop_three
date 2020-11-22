@@ -21,15 +21,131 @@ Anna Eschenbacher | anna.eschenbacher@filmuniversitaet.de | Film University Babe
 ## What is Three.js
 
 ### WebGL
-WebGL is a JavaScript API for rendering interactive 2D and 3D graphics. It is executed on a computer's GPU. It consist of control code written in JavaScript and shader code that is written in OpenGL ES Shading Language (GLSL ES), a language similar to C or C++.
+WebGL is a JavaScript API for rendering interactive 2D and 3D graphics. It is executed on a computer's GPU. It consist of control code written in JavaScript and shader code that is written in OpenGL ES Shading Language (GLSL ES), a language similar to C or C++. 
+[[1] WebGL definition](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
+
+Here is an example for WebGL code:
+```js
+<!doctype html>
+
+<html>
+
+  <body>
+
+ 	<canvas width="500" height="500"></canvas>
+		
+  <script> 
+  
+    var canvas,
+        gl,
+        vertices,
+        vertexBuffer,
+        vertexShader,
+        fragmentShader, 
+        shaderProgram;
+
+    init();
+    setupBuffers();
+    createVertexShader();
+    createFragmentShader();
+    createShaderProgram();
+    assignShadersToBuffers();
+    draw();
+
+    function init()
+    {
+      canvas = document.getElementsByTagName('canvas')[0];
+      gl = canvas.getContext('webgl');
+      vertices = [0, 1, 1, -1, -1, -1];    
+    }
+
+    function setupBuffers()
+    {             
+      vertexBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, null);    
+    }
+
+    function createVertexShader()
+    {
+      var vertexShaderCode =
+      'attribute vec2 coordinates;' + 
+      'void main(void) {' + 
+      ' gl_Position = vec4(coordinates, 0, 1.2);' + 
+      '}';
+
+      vertexShader = gl.createShader(gl.VERTEX_SHADER);
+      gl.shaderSource(vertexShader, vertexShaderCode);
+      gl.compileShader(vertexShader);
+    }
+
+    function createFragmentShader()
+    {
+      var fragementShaderCode = 'void main(void) {' + 
+      'gl_FragColor = vec4(1, 0, 0, 1);' + 
+      '}';
+
+      fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+      gl.shaderSource(fragmentShader, fragementShaderCode);
+      gl.compileShader(fragmentShader);
+    }
+
+    function createShaderProgram()
+    {
+      shaderProgram = gl.createProgram();
+      
+      gl.attachShader(shaderProgram, vertexShader); 
+      gl.attachShader(shaderProgram, fragmentShader);
+      gl.linkProgram(shaderProgram);
+      gl.useProgram(shaderProgram);
+    }
+
+    function assignShadersToBuffers()
+    {
+      var numberOfComponentsPerVertexAttribute = 2,
+          normalizeValues = false,
+          numberOfBytesBetweenElements=0,
+          offset=0,
+          coordinates;
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+
+      coordinates = gl.getAttribLocation(shaderProgram, "coordinates");
+  
+      gl.vertexAttribPointer(coordinates, numberOfComponentsPerVertexAttribute, gl.FLOAT, normalizeValues, numberOfBytesBetweenElements, offset);
+      gl.enableVertexAttribArray(coordinates);
+    }
+
+    function draw()
+    {
+      var drawMode = gl.TRIANGLES,
+          first=0,
+          count=3;
+
+      gl.clearColor(0.7, 0.7, 0.7, 1);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(drawMode, first, count);
+    } 
+
+       
+  </script>
+      
+  </body>
+</html>
+```
+
+This code will produce the following image:
+
+
+As you can see it it's quite a lot to write for a red triangle. That is where Three.js comes in.
 
 ### Three.js
-Three.js is an **open-source library** and **API** using WebGL. It is used to create and display animated 3D graphics in a web browser. It simplifies the creation of WebGL tools and environments.
+Three.js is an **open-source library** and **API** using WebGL. It is used to create and display animated 3D graphics in a web browser. It simplifies the creation of WebGL tools and environments. [[2]](https://github.com/mrdoob/three.js/)
 
 ### Alternatives
-3D Graphics: [babel.js](https://babeljs.io)
-
-2D Graphics: [p5.js](https://p5js.org/), [pixi.js](https://www.pixijs.com/) 
+There are a few alternatives to Three.js. The most popular one for 3D content might be [babel.js](https://babeljs.io).
+Of course [p5.js](https://p5js.org/) is also an alternative, but mostly used for 2D graphics. Aside from that you can find more alternatives [here](https://alternativeto.net/software/three-js/).
 
 ## Example projects
 
@@ -48,8 +164,9 @@ Three.js is an **open-source library** and **API** using WebGL. It is used to cr
 -   [real time short film](http://www.dilladimension.com/)
 -   [my orientation project](https://shapedbymotion.herokuapp.com/) <br><img src="./img/shapedbymotion.jpeg" width="400">
 
--   [more examples](https://threejs.org/examples/#webgl_animation_keyframes)
--   [more features on the three.js website](https://threejs.org/)
+### More Examples can be found here:
+-   [three.js examples](https://threejs.org/examples/#webgl_animation_keyframes)
+-   [featured projects on the three.js](https://threejs.org/)
 
 ## Building your first scene
 
@@ -156,6 +273,7 @@ There are a few different cameras in Three.js. We will use a PerspectiveCamera s
 The first attribute is the **field of view**. FOV is the extent of the scene that is seen on the display at any given moment. The value is in degrees. 
 
 <img src="./img/FOV.jpg" width="500px">
+[[3] FOV Image](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
 
 The second one is the **aspect ratio**. You almost always want to use the width of the element divided by the height, otherwise you'll get a distorted image.
 
@@ -345,7 +463,7 @@ icosa_2.rotation.z += 0.005;
 -   Three.js is a JavaScript library and API used to create and display 3D computer graphics with WebGL
 -   The main components to run a Three.js project are: scene, camera, renderer, light, and 3D mesh (geometry + material)
 
-[[1]](https://github.com/mrdoob/three.js/)
+
 
 ---
 
@@ -360,7 +478,10 @@ icosa_2.rotation.z += 0.005;
 
 ## References
 
-[[1] Github Three.js](https://github.com/mrdoob/three.js/) 
+[[1] WebGL definition](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
+[[2] Github Three.js](https://github.com/mrdoob/three.js/)
+[[3] FOV Image](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
+
 
 ---
 
