@@ -16,6 +16,7 @@ Anna Eschenbacher | anna.eschenbacher@filmuniversitaet.de | Film University Babe
     	-   [Setup](#Setup)
 	-   [Canvas.js](#Canvasjs)
     -   [Summary](#summary)
+    -	[Further Tutorials](#Further-Tutorials)
     -   [References](#references)
 
 ---
@@ -349,7 +350,7 @@ Let's have a look at our scene:
 
 <img src="./img/scene_1.png" width="500px">
 
-Yeahi :) we have a cube, but we can't really move around it. Let's add OrbitControls - a library that enables us to move around the space. 
+Yeahi :) we have a icosahedron, but we can't really move around it. Let's add OrbitControls - a library that enables us to move around the space. 
 
 Add this above the //GEOMETRY tag:
 ```js
@@ -367,9 +368,7 @@ function animate() {
     renderer.render(scene, camera);
 }
 ```
-Now try dragging the mouse across your scene and zooming in and out by scrolling.
-
-We still can't really make out the edges of the cube. Let's add another light below the ambient light.
+Now try dragging the mouse across your scene and zooming in and out by scrolling. We still can't really make out the edges of the cube. Let's add another light below the ambient light.
 
 ```js
 // LIGHTING
@@ -407,9 +406,8 @@ mesh.rotation.y += 0.007;
 
 Congratulations :) You just created your first Three.js application!
 
-To make it prettier we can add a few more things:
 
-Let's start with a floor plane below the mesh. Paste this below the icosahedron ```scene.add(mesh);```
+To make it prettier we can add a few more things. Let's start with a floor plane below the mesh. Paste this below the icosahedron ```scene.add(mesh);```
 
 ```js
 // FLOOR
@@ -424,7 +422,7 @@ scene.add(planeMesh);
 
 Nice! Now we have a floor plane and the point light is casting a shadow onto it. That is why we had to add define which mesh casts or receives shadows earlier. Additionally, we allowed shadows in the beginning with ```renderer.shadowMap.enabled = true;```.
 
-So at the moment we can see the edge of our plane. Sometimes you might want to see it, but let's go with a soft transition to the background color to bring the focus to our object. We can do this by adding. Add the following line to our //SCENE tag:
+So at the moment we can see the edge of our plane. Sometimes you might want to see it, but let's go with a soft transition to the background color to bring the focus to our object. We can do this by adding [fog](https://threejs.org/docs/index.html#api/en/scenes/FogExp2). Add the following line to our //SCENE tag:
 
 ```js
 // SCENE
@@ -434,7 +432,7 @@ scene.fog = new THREE.FogExp2(scene.background, 0.02);
 ```
 You can set the color and density of the fog with ```THREE.FogExp2(color, denisity)```.
 
-As a last step we want to add some interactivity with a GUI. Insert this above the animation loop:
+As a last step we want to add some interactivity with a [GUI](https://github.com/dataarts/dat.gui). Insert this above the animation loop:
 ```js
 // GUI
 let gui = new dat.GUI({ width: 300 });
@@ -464,20 +462,20 @@ icosa_2.rotation.x += 0.008;
 icosa_2.rotation.z += 0.005;
 ```
 
+That's it for now! I added a few more features to the gui in this [file](). Now it's your turn to expand this scene :)🥳✨💥 
+It's always a good starting point to go through the [documentation](https://threejs.org/docs/index.html#api/en/geometries/ConeBufferGeometry) of Three.js to find some parameters you can change and add.
+
+Feel free to contact me if you have any questions: anna.eschenbacher@filmuniversitaet.de
 
 ---
 ## Summary
 
-<!-- ![all](img/06/all.png) -->
-
 -   Three.js is a JavaScript library and API used to create and display 3D computer graphics with WebGL
 -   The main components to run a Three.js project are: scene, camera, renderer, light, and 3D mesh (geometry + material)
 
-
-
 ---
 
-## Further Tutorials/ Resources
+## Further Tutorials
 
 -   https://threejs.org/
 -   https://discoverthreejs.com/
