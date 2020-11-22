@@ -493,7 +493,6 @@ icosa_2.rotation.z += 0.005;
 [[3] Scene Graph](https://miro.medium.com/max/701/1*Bkk14XZa94WTue7F7DrhCA.png)
 [[4] FOV Image](https://cammy-marketing.s3.amazonaws.com/2017/01/1485185693/field-of-view-camera-smartphone-security-camera.png)
 
-
 ---
 
 The End
