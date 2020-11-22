@@ -13,6 +13,8 @@ Anna Eschenbacher | anna.eschenbacher@filmuniversitaet.de | Film University Babe
         -   [Alternatives](#Alternatives)
     -   [Example projects](#Example-projects)
     -   [Building your first scene](#Building-your-first-scene)
+    	-   [Setup](#Setup)
+	-   [Canvas.js](#Canvas.js)
     -   [Summary](#summary)
     -   [References](#references)
 
@@ -21,8 +23,8 @@ Anna Eschenbacher | anna.eschenbacher@filmuniversitaet.de | Film University Babe
 ## What is Three.js
 
 ### WebGL
-WebGL is a JavaScript API for rendering interactive 2D and 3D graphics. It is executed on a computer's GPU. It consist of control code written in JavaScript and shader code that is written in OpenGL ES Shading Language (GLSL ES), a language similar to C or C++. 
-[[1] WebGL definition](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
+WebGL is a JavaScript API for rendering interactive 2D and 3D graphics. It is executed on a computer's GPU. It consists of control code written in JavaScript and shader code that is written in OpenGL ES Shading Language (GLSL ES), a language similar to C or C++. 
+[[1]](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
 
 Here is an example for WebGL code:
 ```js
@@ -136,32 +138,33 @@ Here is an example for WebGL code:
 ```
 
 This code will produce the following image:
+<br><img src="./img/webGL.png" width="400">
 
-
-As you can see it it's quite a lot to write for a red triangle. That is where Three.js comes in.
+As you can see it it's quite **a lot** to write for a red triangle. That is where Three.js comes in.
 
 ### Three.js
-Three.js is an **open-source library** and **API** using WebGL. It is used to create and display animated 3D graphics in a web browser. It simplifies the creation of WebGL tools and environments. [[2]](https://github.com/mrdoob/three.js/)
+Three.js is an **open-source library** and **API** using WebGL. It is used to create and display animated 3D graphics in a web browser. It simplifies the creation of WebGL tools and environments. [[2]](https://github.com/mrdoob/three.js/) This means, there is a whole library of simplified functions for geometries, materials, lighting, audio, etc.
 
 ### Alternatives
 There are a few alternatives to Three.js. The most popular one for 3D content might be [babel.js](https://babeljs.io).
-Of course [p5.js](https://p5js.org/) is also an alternative, but mostly used for 2D graphics. Aside from that you can find more alternatives [here](https://alternativeto.net/software/three-js/).
+Of course [p5.js](https://p5js.org/) is also an alternative, but mostly used for 2D graphics. Aside from that, you can find more alternatives [here](https://alternativeto.net/software/three-js/).
 
 ## Example projects
+
+To get a first idea of what Three.js can do, let's have a look at some example projects:
 
 -   [cat](https://codepen.io/Yakudoo/pen/oXJYxy) <br><img src="./img/cat.png" width="400">
 -   [noise blob](https://codepen.io/vcomics/pen/ZwNgvX?editors=1010) <br><img src="./img/blob.png" width="400">
 -   [Kid TV Scene (loading 3D model)](https://codepen.io/SaschaSigl/pen/gpVKOa?editors=0010) <br><img src="./img/tv.png" width="400">
 -   [rain](https://codepen.io/iondrimba/pen/EMwvgE) <br><img src="./img/rain.png" width="400">
 -   [plane animation](https://codepen.io/ste-vg/pen/GRooLza?editors=0010) <br><img src="./img/plane.png" width="400">
-
 -   [clipping](https://threejs.org/examples/#webgl_clipping_stencil) <br><img src="./img/clipping.png" width="400">
 -   [instancing](https://threejs.org/examples/#webgl_buffergeometry_instancing) <br><img src="./img/instancing.png" width="400">
 -   [postprocessing](https://threejs.org/examples/#webgl_postprocessing_unreal_bloom) <br><img src="./img/postprocessing.png" width="400">
 -   [portfolio website](https://bruno-simon.com/) <br><img src="./img/portfolio.png" width="400">
 -   [agency website](https://lusion.co/) <br><img src="./img/agency.png" width="400">
 -   [storytelling: oat the goat](http://oatthegoat.co.nz/) <br><img src="./img/oatthegoat.jpg" width="400">
--   [real time short film](http://www.dilladimension.com/)
+-   [real time short film](http://www.dilladimension.com/) <br><img src="./img/donut.png" width="400">
 -   [my orientation project](https://shapedbymotion.herokuapp.com/) <br><img src="./img/shapedbymotion.jpeg" width="400">
 
 ### More Examples can be found here:
@@ -170,9 +173,11 @@ Of course [p5.js](https://p5js.org/) is also an alternative, but mostly used for
 
 ## Building your first scene
 
+So let's get started with our first Three.js project.
+
 ### Setup
 
-Folder structure
+We will use a similar folder structure as you have used in the previous weeks. We have a Three.js folder with our style.css file in the 'css' folder. The necessary libraries ([three.min.js](https://raw.githubusercontent.com/mrdoob/three.js/dev/build/three.min.js), [dat.gui.min.js](https://raw.githubusercontent.com/dataarts/dat.gui/master/build/dat.gui.min.js), [OrbitControls.js](https://raw.githubusercontent.com/mrdoob/three.js/master/examples/jsm/controls/OrbitControls.js)) are in the lib folder, so we don't have to save them in every single project. Our project folder is named 'workshop'. In here, we have our index.html file and we have the canvas.js file, where we will write our three.js project. I uploaded the file structure [here](https://github.com/ctechfilmuniversity/lecture_creative_coding_1/tree/master/01_sessions/04_space) and added everything to it so we can focus on our canvas.js file.
 
 ```js
 - threejs
@@ -185,8 +190,6 @@ Folder structure
     - workshop
         - index.html
         - canvas.js
-        - data
-            - texture.jpg
 ```
 
 Our css file:
@@ -201,6 +204,8 @@ canvas {
     display: block;
 }
 ```
+We don't use css much, but we want to make sure, that our canvas fills the entire browser window.
+
 
 Our html file:
 ```html
@@ -231,12 +236,13 @@ Our html file:
 
 </html>
 ```
-We import the necessary libraries either locally or from an URL. Generally it makes sense to download the script, in case changes are made to the online version. Otherwise this might cause errors in your project. We are using some minified libraries. They are contentwise the same just smaller in file size.
+We import the necessary libraries either locally or from an URL. Generally it makes sense to download the script, in case changes are made to the online version. Otherwise this might cause errors in your project. I would recommend using the same library files as I uploaded in the folder structure to avoid errors with updated files. We are using some minified libraries, they are contentwise the same just smaller in file size. 
 
-We also call our ```canvas.js``` file, where we will put in our Three.js code.
+We also call our ```canvas.js``` file, where we will put in our Three.js code inside the <body> tag.
 
 To run this project we will use the same extensions as Lena did - [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for VSCode.
 
+### Canvas.js
 
 Now the fun part begins - let's get started with our ```canvas.js``` file.
 
