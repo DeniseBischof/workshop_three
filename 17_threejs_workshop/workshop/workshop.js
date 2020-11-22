@@ -28,9 +28,11 @@ window.addEventListener('resize', () => {
 let controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // LIGHTING
+// AMBIENT
 let ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambientLight);
 
+// POINT LIGHT
 let pointLight = new THREE.PointLight(0xc9efff, 0.8);
 pointLight.position.set(0, 4, 2);
 pointLight.castShadow = true;
@@ -46,6 +48,7 @@ const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
 scene.add(pointLightHelper);
 
 // GEOMETRY
+// PLANE
 let planeGeometry = new THREE.PlaneBufferGeometry(300, 300);
 let planeMaterial = new THREE.MeshPhongMaterial({ color: '#9c9595', depthWrite: false });
 let planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -54,15 +57,14 @@ planeMesh.position.y = -10;
 planeMesh.receiveShadow = true;
 scene.add(planeMesh);
 
-// let geometry = new THREE.BoxGeometry(1, 1.5, 1);
+// ICOSAHEDRON
 let geometry = new THREE.IcosahedronGeometry(1.5, 0); //radius, detail
-// const texture = new THREE.TextureLoader().load('./data/street_texture.jpg');
-// let material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0, map: texture });
-let material = new THREE.MeshStandardMaterial({ color: 0xaa5e82, roughness: 0 });
+let material = new THREE.MeshPhongMaterial({ color: 0xaa5e82, roughness: 0 });
 let icosa = new THREE.Mesh(geometry, material);
 icosa.castShadow = true;
 scene.add(icosa);
 
+// ICOSAHEDRON 2
 let icosaGeometry_2 = new THREE.IcosahedronGeometry(2.0, 0); //radius, detail
 let material_2 = new THREE.MeshPhongMaterial({ color: 0x2d2d2d, wireframe: true });
 let icosa_2 = new THREE.Mesh(icosaGeometry_2, material_2);
