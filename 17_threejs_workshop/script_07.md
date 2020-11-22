@@ -351,7 +351,7 @@ animate();
 
 Let's have a look at our scene:
 
-<img src="./img/scene_1.png" width="500px">
+<img src="./img/scene_1.png" width="600px">
 
 Yeahi :) we have a icosahedron, but we can't really move around it. Let's add OrbitControls - a library that enables us to move around the space. 
 
@@ -440,6 +440,10 @@ scene.fog = new THREE.FogExp2(scene.background, 0.02);
 ```
 You can set the color and density of the fog with ```THREE.FogExp2(color, denisity)```.
 
+Your scene should look something like this:
+
+<img src="./img/scene_2.png" width="600px">
+
 As a last step we want to add some interactivity with a [GUI](https://github.com/dataarts/dat.gui). Insert this above the animation loop:
 ```js
 // GUI
@@ -501,6 +505,7 @@ function animate() {
 }
 animate();
 ```
+<img src="./img/scene_3.png" width="600px">
 
 That's it for now! I added a few more features to the gui in this [file](). Now it's your turn to expand this scene :)🥳✨💥 
 
