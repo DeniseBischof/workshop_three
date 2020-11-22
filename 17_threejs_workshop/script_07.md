@@ -7,20 +7,20 @@ Anna Eschenbacher | anna.eschenbacher@filmuniversitaet.de | Film University Babe
 # Script 07: Three.js
 
 -   [Script 07: Three.js](#script-05-the-web)
-    -   [What is Threejs](#What-is-Three.js)
+    -   [What is Threejs](#What-is-Threejs)
         -   [WebGL](#WebGL)
-        -   [Three.js](#Three.js)
+        -   [Three.js](#Threejs)
         -   [Alternatives](#Alternatives)
     -   [Example projects](#Example-projects)
     -   [Building your first scene](#Building-your-first-scene)
     	-   [Setup](#Setup)
-	-   [Canvas.js](#Canvas.js)
+	-   [Canvas.js](#Canvasjs)
     -   [Summary](#summary)
     -   [References](#references)
 
 ---
 
-## What is Three.js
+## What is Threejs
 
 ### WebGL
 WebGL is a JavaScript API for rendering interactive 2D and 3D graphics. It is executed on a computer's GPU. It consists of control code written in JavaScript and shader code that is written in OpenGL ES Shading Language (GLSL ES), a language similar to C or C++. 
@@ -142,7 +142,7 @@ This code will produce the following image:
 
 As you can see it it's quite **a lot** to write for a red triangle. That is where Three.js comes in.
 
-### Three.js
+### Threejs
 Three.js is an **open-source library** and **API** using WebGL. It is used to create and display animated 3D graphics in a web browser. It simplifies the creation of WebGL tools and environments. [[2]](https://github.com/mrdoob/three.js/) This means, there is a whole library of simplified functions for geometries, materials, lighting, audio, etc.
 
 A basic Three.js project consits of these elements:
@@ -246,7 +246,7 @@ We also call our ```canvas.js``` file, where we will put in our Three.js code in
 
 To run this project we will use the same extensions as Lena did - [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for VSCode.
 
-### Canvas.js
+### Canvasjs
 
 Now the fun part begins - let's get started with our ```canvas.js``` file.
 
