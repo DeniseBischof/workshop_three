@@ -245,13 +245,14 @@ We import the necessary libraries either locally or from an URL. Generally it ma
 
 We also call our ```canvas.js``` file, where we will put in our Three.js code inside the <body> tag.
 
-To run this project we will use the same extensions as Lena did - [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for VSCode.
+To run this project we will use the same extensions as Lena did - [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for VSCode. You should open your threejs folder in VSCode, so the live server can access the libraries (not just the project folder).
 
 ### Canvasjs
 
 Now the fun part begins - let's get started with our ```canvas.js``` file.
 
 To actually be able to display anything with three.js, we need three things: scene, camera and renderer, so that we can render the scene with camera.
+I already added some tags in the canvas.js file, so you know where to copy the code.
 
 ```js
 // SCENE
