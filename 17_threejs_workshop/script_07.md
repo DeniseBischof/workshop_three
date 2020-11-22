@@ -349,7 +349,7 @@ function animate() {
 animate();
 ```
 
-Let's have a look at our scene:
+Let's have a look at our scene. When you start the live-server you still have to click on workshop to open our index file.
 
 <img src="./img/scene_1.png" width="600px">
 
